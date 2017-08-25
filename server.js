@@ -5,20 +5,73 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+
+var articles = {
+	
+	'article-one': {
+		
+		title : 'Article One',
+		date : 'Aug 1 2017',
+		content : `
+		<p>
+			This is first article.
+		</p>
+		`		
+	},
+	
+	'article-two': {
+		title : 'Article two',
+		date : 'Aug 2 2017',
+		content :  `
+		<p>
+			This is second article.
+		</p>
+		`		
+	},
+	
+	'article-three': {
+		title : 'Article three',
+		date : 'Aug 3 2017',
+		content :  `
+		<p>
+			This is three article.
+		</p>
+		`		
+	}
+	
+};
+
+function createHtml(data){
+	
+	var title = data.title;
+	var date = data.date;
+	var content = data.content;
+var htmlTemplate = `
+<html>
+	<head>
+		<title>${title}</title>
+	</head>
+<body>
+	<div>
+	${data.date}
+	</div>
+	<div>${data.content}</div>
+</body>	
+</html>
+
+`;
+
+return htmlTemplate;	
+}
+
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function(req, res){
-    res.send("Article one");
-});
-
-app.get('/article-two', function(req, res){
-    res.send("Article two");
-});
-
-app.get('/article-three', function(req, res){
-    res.send("Article three");
+app.get('/:articleParam',function(req, res){
+	var articleName = req.params.articleParam;
+	res.send(createHtml(articles[articleName]));
 });
 
 app.get('/ui/style.css', function (req, res) {
