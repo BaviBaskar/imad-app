@@ -1,9 +1,19 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var pool = require('pg').Pool;
 
 var app = express();
 app.use(morgan('combined'));
+
+var config = {
+  user: 'bavi2baskar',
+  password:proc.env.DB_PASSWORD,
+  database: 'bavi2baskar',
+  table: 'test'
+};
+
+var pool = new Pool(Config);
 
 
 var articles = {
@@ -63,6 +73,11 @@ var htmlTemplate = `
 
 return htmlTemplate;	
 }
+
+
+app.get('/test-db', function(req, res){
+   res 
+});
 
 
 app.get('/', function (req, res) {
