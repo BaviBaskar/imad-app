@@ -13,7 +13,7 @@ var config = {
   host: 'db.imad.hasura-app.io'
 };
 
-var pool = new Pool(Config);
+var pool = new Pool(config);
 
 
 var articles = {
