@@ -76,15 +76,15 @@ return htmlTemplate;
 
 
 app.get('/test-db', function(req, res){
-    pool.query("SELECT * FROM test", function(err, res){
+    pool.query("SELECT * FROM test", function(err, result){
        if(err){
            res.send(err.toString());
        } else{
-           if(res.rows.length == 0){
-               var result = "No rows found";
-               res.send(result.toString());
+           if(result.rows.length == 0){
+               var result1 = "No rows found";
+               res.send(result1.toString());
            }else {
-               res.send(JSON.stringify(res.rows));
+               res.send(JSON.stringify(result.rows));
            }
        }
     });
