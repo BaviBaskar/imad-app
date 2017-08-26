@@ -82,7 +82,7 @@ app.get('/test-db', function(req, res){
        } else{
            if(res.rows.length == 0){
                var result = "No rows found";
-               res.send(result);
+               res.send(result.toString());
            }else {
                res.send(JSON.stringify(res.rows));
            }
