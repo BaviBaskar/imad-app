@@ -8,7 +8,7 @@ app.use(morgan('combined'));
 
 var config = {
   user: 'bavi2baskar',
-  password:proc.env.DB_PASSWORD,
+  password:process.env.DB_PASSWORD,
   database: 'bavi2baskar',
   host: 'db.imad.hasura-app.io'
 };
@@ -81,6 +81,8 @@ app.get('/test-db', function(req, res){
            res.send(err.toString());
        } else{
            if(res.rows.length == 0){
+               res.send("Rows not found.");
+           }else {
                res.send(JSON.stringify(res.rows));
            }
        }
