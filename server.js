@@ -2,6 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
+var crypto = require('crypto');
 
 var app = express();
 app.use(morgan('combined'));
@@ -14,6 +15,20 @@ var config = {
 };
 
 var pool = new Pool(config);
+
+
+function hash(inputVal, saltVal){
+    var hashVal = crypto.pbkdf2Sync(inputVal, saltVal,100000, 512, 'sha512')
+    return hashVal.toString('hex');
+}
+
+
+app.get('/hash/:input', function(req, res){
+   var hashedInput = hash(req.params.input, 'baveenther-salt-value'); 
+   return hashedInput;
+});
+
+
 
 
 var articles = {
