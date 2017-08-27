@@ -19,7 +19,7 @@ var pool = new Pool(config);
 
 function hash(inputVal, saltVal){
     var hashVal = crypto.pbkdf2Sync(inputVal, saltVal,100000, 512, 'sha512')
-    return ['pbkdf2sync', inputVal, saltVal,hashVal.length(),hashVal.toString('hex')].join('$');
+    return ['pbkdf2sync', inputVal, saltVal,hashVal.length,hashVal.toString('hex')].join('$');
 }
 
 
