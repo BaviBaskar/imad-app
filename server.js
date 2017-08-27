@@ -25,7 +25,7 @@ function hash(inputVal, saltVal){
 
 app.get('/hash/:input', function(req, res){
    var hashedInput = hash(req.params.input, 'baveenther-salt-value'); 
-   return hashedInput;
+   res.send(hashedInput);
 });
 
 
